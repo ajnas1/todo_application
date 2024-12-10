@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo/utlities/colors.dart';
 import 'package:todo/utlities/constants.dart';
 import 'package:todo/view/register_screen.dart';
+import 'package:todo/viewModel/forgotpassword_screen_provider.dart';
 import 'package:todo/widget/continue_button_widget.dart';
 import 'package:todo/widget/textField_widget.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
-  ForgotPasswordScreen({super.key});
-  final TextEditingController _emailController = TextEditingController();
+  const ForgotPasswordScreen({super.key});
 
-  void callback(BuildContext context) {}
+  void callback(BuildContext context) {
+    Provider.of<ForgotpasswordScreenProvider>(context,listen: false).resetPassword();
+  }
   @override
   Widget build(BuildContext context) {
+  var forgotpasswordScreenProvider = context.read<ForgotpasswordScreenProvider>();
     return Scaffold(
       backgroundColor: backgroundColor,
       body: Column(
@@ -45,7 +49,7 @@ class ForgotPasswordScreen extends StatelessWidget {
           const SizedBox(
             height: 50,
           ),
-          TextFieldWidget(_emailController, label: 'Email'),
+          TextFieldWidget(forgotpasswordScreenProvider.emailController, label: 'Email'),
           const SizedBox(
             height: 15,
           ),
