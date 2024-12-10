@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo/services/firebase_services.dart';
 
 class RegisterScreenProvider extends ChangeNotifier{
   final TextEditingController _fullNameController = TextEditingController();
@@ -12,6 +13,6 @@ class RegisterScreenProvider extends ChangeNotifier{
   TextEditingController get passwordController=>_passwordController;
 
   void registerAccount() {
-    //FirebaseServices().registerAccount(_emailController.text, _passwordController.text);
+    FirebaseServices().registerAccount(_emailController.text, _passwordController.text);
   }
 }
