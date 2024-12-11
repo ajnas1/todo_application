@@ -5,10 +5,9 @@ class TaskModel {
   // String iconUrl;
   String task;
   String emogie;
-   IconData? icon=Icons.add;
   List<TodoModel> todo;
 
-  TaskModel({required this.task, required this.todo,required this.emogie,this.icon});
+  TaskModel({required this.task, required this.todo,required this.emogie});
 
   Map<String, dynamic> toJson() {
     return {
