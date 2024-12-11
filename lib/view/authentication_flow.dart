@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:todo/view/categories_screen.dart';
 import 'package:todo/view/login_screen.dart';
 
 class AuthenticationFlow extends StatelessWidget {
@@ -12,7 +13,7 @@ class AuthenticationFlow extends StatelessWidget {
         stream: FirebaseAuth.instance.authStateChanges(), 
         builder:(context, snapshot) {
           if(snapshot.hasData) {
-            return  LoginScreen();
+            return  const CategoriesScreen();
           }else {
             return LoginScreen();
           }
