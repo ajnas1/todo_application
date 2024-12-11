@@ -37,7 +37,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                 padding: EdgeInsets.only(
                     left: MediaQuery.of(context).size.width * 0.19),
                 child: const Text(
-                  'Create An Account',
+                  'Forgot Password',
                   style: TextStyle(
                       fontSize: 20,
                       color: Colors.black,
@@ -67,7 +67,7 @@ class ForgotPasswordScreen extends StatelessWidget {
             height: 50,
           ),
           Padding(
-              padding: loginScreenPadding,
+              padding: authenticationScreensPadding,
               child: cotinueButtonWidget(
                   context: context, title: 'Continue', callBack: callback)),
           const SizedBox(
@@ -76,16 +76,16 @@ class ForgotPasswordScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Don\'t have account? '),
+              const Text('Don\'t have account? '),
               GestureDetector(
                 onTap: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => RegisterScreen(),
+                        builder: (context) => const RegisterScreen(),
                       ));
                 },
-                child: Text(
+                child: const Text(
                   'Register',
                   style: TextStyle(
                       color: authenticationScreensClickableTextColor,

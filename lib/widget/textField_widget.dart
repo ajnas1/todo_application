@@ -11,15 +11,15 @@ class TextFieldWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     print(error);
     return Container(
-      padding: loginScreenPadding,
+      padding: authenticationScreensPadding,
       height: 90,
-      width: 380,
+      width: MediaQuery.of(context).size.width * 0.99,
       child: TextFormField(
         controller: _controller,
         decoration: InputDecoration(
           errorText: error,
           enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey),
+            borderSide: const BorderSide(color: Colors.grey),
             borderRadius: BorderRadius.circular(0),
           ),
           focusedBorder: OutlineInputBorder(
@@ -27,11 +27,11 @@ class TextFieldWidget extends StatelessWidget {
           ),
           errorBorder:  OutlineInputBorder(
             borderRadius: BorderRadius.circular(0),
-            borderSide: BorderSide(color: Colors.red)
+            borderSide: const BorderSide(color: Colors.red)
           ),
           focusedErrorBorder:  OutlineInputBorder(
             borderRadius: BorderRadius.circular(0),
-            borderSide: BorderSide(color: Colors.black)
+            borderSide: const BorderSide(color: Colors.black)
           ),
           labelText: label,
         ),

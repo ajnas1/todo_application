@@ -8,35 +8,36 @@ import 'package:todo/widget/textField_widget.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
- 
 
-  void callback(BuildContext context) {
-    print('dfjndf');
-    Provider.of<RegisterScreenProvider>(context,listen: false).registerAccount();
-                   // Navigator.push(context, MaterialPageRoute(builder:(context) => RegisterScreen(),));
-                  }
+  void callback(BuildContext context) async {
+    await Provider.of<RegisterScreenProvider>(context, listen: false)
+        .registerAccount();
+    Navigator.pop(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundColor,
-      body:  Consumer<RegisterScreenProvider>(
-        builder:(context, value, child) =>  Column(
+      body: Consumer<RegisterScreenProvider>(
+        builder: (context, value, child) => Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.25,
+              height: MediaQuery.of(context).size.height * 0.18,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 IconButton(
-                  onPressed: (){
-                    Navigator.pop(context);
-                  }, 
-                  icon: const Icon(Icons.arrow_back)),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(Icons.arrow_back)),
                 Padding(
-                  padding:  EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.19),
+                  padding: EdgeInsets.only(
+                      left: MediaQuery.of(context).size.width * 0.158),
                   child: const Text(
                     'Create An Account',
                     style: TextStyle(
@@ -50,48 +51,54 @@ class RegisterScreen extends StatelessWidget {
             const SizedBox(
               height: 30,
             ),
-            TextFieldWidget(value.fullNameController, label: 'Full Name',error: value.registerErrorsModel.fullNameError),
+            TextFieldWidget(value.fullNameController,
+                label: 'Full Name',
+                error: value.registerErrorsModel.fullNameError),
             const SizedBox(
               height: 10,
             ),
-            TextFieldWidget(value.emailController, label: 'Email',error: value.registerErrorsModel.emailError),
+            TextFieldWidget(value.emailController,
+                label: 'Email', error: value.registerErrorsModel.emailError),
             const SizedBox(
               height: 10,
             ),
-            TextFieldWidget(value.passwordController, label: 'Password',error: value.registerErrorsModel.passwordError),
+            TextFieldWidget(value.passwordController,
+                label: 'Password',
+                error: value.registerErrorsModel.passwordError),
             const SizedBox(
               height: 10,
             ),
-            TextFieldWidget(value.conformPasswordController, label: 'Conform Password',error: value.registerErrorsModel.confromPasswordError,),
+            TextFieldWidget(
+              value.conformPasswordController,
+              label: 'Conform Password',
+              error: value.registerErrorsModel.confromPasswordError,
+            ),
             const SizedBox(
               height: 5,
             ),
-            Padding(
-                padding: loginScreenPadding,
-                child: GestureDetector(
-                  onTap: () {},
-                  child: const Text(
-                    'Forgot Password?',
-                    style: TextStyle(color: authenticationScreensClickableTextColor,fontWeight: FontWeight.bold),
-                  ),
-                )),
             const SizedBox(
               height: 30,
             ),
             Padding(
-                padding: loginScreenPadding,
+                padding: authenticationScreensPadding,
                 child: cotinueButtonWidget(
                     context: context, title: 'Continue', callBack: callback)),
-                    const SizedBox(height: 30,),
+            const SizedBox(
+              height: 30,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text('Already have an account? '),
                 GestureDetector(
-                  onTap: () {},
-                  child:  const Text(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text(
                     'Log in',
-                    style: TextStyle(color: authenticationScreensClickableTextColor,fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        color: authenticationScreensClickableTextColor,
+                        fontWeight: FontWeight.bold),
                   ),
                 )
               ],

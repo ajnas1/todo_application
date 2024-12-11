@@ -13,11 +13,6 @@ class LoginScreen extends StatelessWidget {
 
   void callback(BuildContext context) {
     Provider.of<LoginScreenProvider>(context,listen: false).loginInAccount();
-    // Navigator.push(
-    //     context,
-    //     MaterialPageRoute(
-    //       builder: (context) => RegisterScreen(),
-    //     ));
   }
 
   @override
@@ -53,7 +48,7 @@ class LoginScreen extends StatelessWidget {
               height: 5,
             ),
             Padding(
-                padding: loginScreenPadding,
+                padding: authenticationScreensPadding,
                 child: GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(builder:(context) => ForgotPasswordScreen()));
@@ -69,7 +64,7 @@ class LoginScreen extends StatelessWidget {
               height: 50,
             ),
             Padding(
-                padding: loginScreenPadding,
+                padding: authenticationScreensPadding,
                 child: cotinueButtonWidget(
                     context: context, title: 'Continue', callBack: callback)),
             const SizedBox(

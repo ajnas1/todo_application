@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo/model/register_errors_model.dart';
-import 'package:todo/services/firebase_services.dart';
+import 'package:todo/services/firebaseAuth_services.dart';
 
 class RegisterScreenProvider extends ChangeNotifier{
   RegisterErrorsModel _registerErrorsModel = RegisterErrorsModel();
@@ -15,7 +15,7 @@ class RegisterScreenProvider extends ChangeNotifier{
   TextEditingController get conformPasswordController=>_conformPasswrdController;
   TextEditingController get passwordController=>_passwordController;
 
-  void registerAccount() async {
+  Future<void> registerAccount() async {
     bool isError = false;
     if(_fullNameController.text.isEmpty){
       registerErrorsModel.fullNameError = 'Please enter your fullName';

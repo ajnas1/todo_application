@@ -7,9 +7,7 @@ Widget cotinueButtonWidget(
     required Function callBack}) {
   return ElevatedButton(
     onPressed: () {
-      print('fj');
       callBack(context);
-      print('fj');
     },
     style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
