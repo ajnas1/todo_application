@@ -6,17 +6,17 @@ import 'package:todo/widget/taskAlert_dialog_widget.dart';
 
 Widget categoriesWidget(
     BuildContext context,
-    TaskModel task,
+    TaskModel? task,
     TextEditingController titleController,
     TextEditingController emogieController,
-    int index,
+    int? index,
     {bool isNotFirst = true}) {
   return GestureDetector(
     onTap: () {
-      if (isNotFirst) {
+      if (isNotFirst && index !=null) {
         Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => TodoDetailsScreen(
-            taskIndex: index,
+            taskIndex: index!,
           ),
         ));
       } else {
@@ -29,7 +29,7 @@ Widget categoriesWidget(
           padding: const EdgeInsets.all(20),
           height: MediaQuery.of(context).size.height * 0.2,
           width: MediaQuery.of(context).size.width * 0.445,
-          child: isNotFirst
+          child: isNotFirst && task!=null
               ? Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,

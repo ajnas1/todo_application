@@ -5,7 +5,6 @@ import 'package:todo/utlities/constants.dart';
 import 'package:todo/view/settings_screen.dart';
 import 'package:todo/viewModel/categoriesScreen_provider.dart';
 import 'package:todo/widget/categories_widget.dart';
-import 'package:todo/widget/taskAlert_dialog_widget.dart';
 
 class CategoriesScreen extends StatelessWidget {
    const CategoriesScreen({super.key}); 
@@ -81,6 +80,9 @@ class CategoriesScreen extends StatelessWidget {
               StreamBuilder(
                 stream: value.getTaskName(),
                 builder:(context, snapshot) {
+                  // if(!snapshot.hasData){
+                  //   return categoriesWidget(context,null,value.addTaskController,value.addEmogieController,null,isNotFirst: false);
+                  // }
                   
                   if(value.catergriesStatus == CatergriesStatus.loaded && snapshot.data !=null) {
                     List<TaskModel> task= snapshot.data?.docs
@@ -92,8 +94,8 @@ class CategoriesScreen extends StatelessWidget {
                     return Container(
                   padding: const EdgeInsets.only(left: 15,right: 15),
                   height: MediaQuery.of(context).size.height * 0.65,
-                  child: GridView.builder(
-                    itemCount: task.length+1,
+                  child: task.isNotEmpty? GridView.builder(
+                    itemCount: task.isEmpty?0: task.length+1,
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(  
                         crossAxisCount: 2,  
                         crossAxisSpacing: 15.0,  
@@ -106,6 +108,9 @@ class CategoriesScreen extends StatelessWidget {
                       print(index);
                       
                       return categoriesWidget(context,task[index-1],value.addTaskController,value.addEmogieController,index-1);}
+                  ):  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 150),
+                    child: categoriesWidget(context,null,value.addTaskController,value.addEmogieController,null,isNotFirst: false),
                   ),
                 );
                   }else if(value.catergriesStatus == CatergriesStatus.loading){
