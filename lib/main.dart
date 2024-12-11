@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:todo/firebase_options.dart';
 import 'package:todo/utlities/constants.dart';
 import 'package:todo/view/authentication_flow.dart';
-import 'package:todo/view/login_screen.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,9 +21,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return   MaterialApp(
+    return  const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      home: AuthenticationFlow(),
     );
   }
 }

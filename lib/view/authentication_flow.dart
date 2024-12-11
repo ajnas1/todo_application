@@ -12,7 +12,7 @@ class AuthenticationFlow extends StatelessWidget {
         stream: FirebaseAuth.instance.authStateChanges(), 
         builder:(context, snapshot) {
           if(snapshot.hasData) {
-            return Scaffold();
+            return  LoginScreen();
           }else {
             return LoginScreen();
           }

@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:todo/model/register_errors_model.dart';
-import 'package:todo/model/user_data_model.dart';
 
 class FirebaseServices {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -11,13 +10,6 @@ class FirebaseServices {
       
       final credential = await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
-      
-      // final User? user = credential.user;
-      
-      // if (user != null) {
-      //   return UserDataModel(
-      //       uid: user.uid, email: user.email);
-      // }
     } on FirebaseAuthException catch (e) {
       //if the try get any exception we handling with some error code
       if (e.code == 'weak-password') {
@@ -44,13 +36,6 @@ class FirebaseServices {
       
       final credential = await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
-      
-      // final user = credential.user;
-     
-      // if (user != null) {
-      //   return UserDataModel(
-      //       uid: user.uid, email: user.email,);
-      // }
     } on FirebaseAuthException catch (e) {
       //if the try get any exception we handling with some error code
       if (e.code == 'wrong-password') {
@@ -71,6 +56,8 @@ class FirebaseServices {
     return loginErrors;
   }
   
+
+  //for if the user forgot his password that time user can reset his password with this method it send a link to his mail
   void resetPassword(String email) async {
     try {
       _firebaseAuth.sendPasswordResetEmail(email: email).then((dskjm){

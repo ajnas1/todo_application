@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo/model/register_errors_model.dart';
-import 'package:todo/services/firebase_services.dart';
+import 'package:todo/services/firebaseAuth_services.dart';
 
 class LoginScreenProvider extends ChangeNotifier {
   RegisterErrorsModel _registerErrorsModel = RegisterErrorsModel();
@@ -20,7 +20,6 @@ class LoginScreenProvider extends ChangeNotifier {
     }
     if(passwordController.text.isEmpty) {
       loginErrorsModel.passwordError = 'Please enter your password';
-      print(loginErrorsModel.passwordError);
       isError = true;
     }
     if(!isError) {
@@ -33,7 +32,6 @@ class LoginScreenProvider extends ChangeNotifier {
     }else {
       notifyListeners();
     } 
-    print(passwordController.text);
     notifyListeners();
     
   }

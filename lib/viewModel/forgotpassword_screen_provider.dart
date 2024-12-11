@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo/services/firebase_services.dart';
+import 'package:todo/services/firebaseAuth_services.dart';
 
 class ForgotpasswordScreenProvider extends ChangeNotifier{
   final TextEditingController _emailController = TextEditingController();
