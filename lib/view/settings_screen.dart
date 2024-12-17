@@ -1,12 +1,16 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo/utlities/constants.dart';
-import 'package:todo/viewModel/settingsElement_widget.dart';
+import 'package:todo/viewModel/settingsProvider.dart';
+import 'package:todo/widget/settingsElement_widget.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<Settingsprovider>(context,listen: false).startSettings();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -18,14 +22,16 @@ class SettingsScreen extends StatelessWidget {
           children: [
             Row(
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(30),
-                  child: SizedBox(
-                    height: 60,
-                    width: 60,
-                    child: Image.network(
-                      'https://th.bing.com/th/id/OIP.CAbTaFvo9r1nh2uSZgd5yAAAAA?rs=1&pid=ImgDetMain',
-                      fit: BoxFit.cover,
+                Consumer<Settingsprovider>(
+                  builder:(context, value, child) =>  ClipRRect(
+                    borderRadius: BorderRadius.circular(30),
+                    child: SizedBox(
+                      height: 60,
+                      width: 60,
+                      child: FirebaseAuth.instance.currentUser!.photoURL! == null? Image.network(
+                        'https://th.bing.com/th/id/OIP.CAbTaFvo9r1nh2uSZgd5yAAAAA?rs=1&pid=ImgDetMain',
+                        fit: BoxFit.cover,
+                      ):Image.network(value.networkImage!,fit: BoxFit.cover,)
                     ),
                   ),
                 ),
@@ -41,7 +47,9 @@ class SettingsScreen extends StatelessWidget {
                 ),
                 const Spacer(),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Provider.of<Settingsprovider>(context,listen: false).openImagePicker();
+                  },
                   style: ElevatedButton.styleFrom(
                     fixedSize: const Size(50, 50),
                     shape: const CircleBorder(),
