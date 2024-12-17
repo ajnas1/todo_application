@@ -7,6 +7,7 @@ import 'package:todo/viewModel/categoriesScreen_provider.dart';
 import 'package:todo/viewModel/forgotpassword_screen_provider.dart';
 import 'package:todo/viewModel/login_screen_provider.dart';
 import 'package:todo/viewModel/register_screen_provider.dart';
+import 'package:todo/viewModel/settingsProvider.dart';
 import 'package:todo/viewModel/todoDetails_screen_provider.dart';
 
 final List<SingleChildWidget> provider = [
@@ -15,6 +16,7 @@ final List<SingleChildWidget> provider = [
     ChangeNotifierProvider(create: (context) => ForgotpasswordScreenProvider()),
     ChangeNotifierProvider(create:(context) => CategoriesscreenProvider()),
     ChangeNotifierProvider(create:(context) => TododetailsScreenProvider()),
+    ChangeNotifierProvider(create:(context) => Settingsprovider()),
 ];
 
 

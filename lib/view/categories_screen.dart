@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo/model/task_model.dart';
@@ -10,25 +11,27 @@ class CategoriesScreen extends StatelessWidget {
    const CategoriesScreen({super.key}); 
   @override
   Widget build(BuildContext context) {
+    Provider.of<CategoriesscreenProvider>(context,listen: false).openCatergories();
     bool isFirst=true;
     return Consumer<CategoriesscreenProvider>(
       builder:(context, value, child) =>  Scaffold(
         appBar: AppBar(
           leading: Padding(
-            padding: const EdgeInsets.only(left: 9),
+            padding: const EdgeInsets.only(left: 9,top: 10),
             child: GestureDetector(
-              onTap: (){
-                Navigator.of(context).push(MaterialPageRoute(builder:(context) => const SettingsScreen(),));
+              onTap: () async{
+               await Navigator.of(context).push(MaterialPageRoute(builder:(context) => const SettingsScreen(),));
+               Provider.of<CategoriesscreenProvider>(context,listen: false).updateProfile();
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(30),
                 child: SizedBox(
                   height: 60,
                   width: 60,
-                  child: Image.network(
-                    'https://th.bing.com/th/id/OIP.CAbTaFvo9r1nh2uSZgd5yAAAAA?rs=1&pid=ImgDetMain',
-                    fit: BoxFit.cover,
-                  ),
+                  child: value.networkImage == null? Image.network(
+                        'https://th.bing.com/th/id/OIP.CAbTaFvo9r1nh2uSZgd5yAAAAA?rs=1&pid=ImgDetMain',
+                        fit: BoxFit.cover,
+                      ):Image.network(value.networkImage!,fit: BoxFit.cover,)
                 ),
               ),
             ),
@@ -56,10 +59,10 @@ class CategoriesScreen extends StatelessWidget {
                         child: SizedBox(
                           height: 60,
                           width: 60,
-                          child: Image.network(
-                            'https://th.bing.com/th/id/OIP.CAbTaFvo9r1nh2uSZgd5yAAAAA?rs=1&pid=ImgDetMain',
-                            fit: BoxFit.cover,
-                          ),
+                          child: FirebaseAuth.instance.currentUser!.photoURL! == null? Image.network(
+                        'https://th.bing.com/th/id/OIP.CAbTaFvo9r1nh2uSZgd5yAAAAA?rs=1&pid=ImgDetMain',
+                        fit: BoxFit.cover,
+                      ):Image.network(FirebaseAuth.instance.currentUser!.photoURL!,fit: BoxFit.cover,)
                         ),
                       ),
                       const SizedBox(width: 10,),
@@ -80,10 +83,6 @@ class CategoriesScreen extends StatelessWidget {
               StreamBuilder(
                 stream: value.getTaskName(),
                 builder:(context, snapshot) {
-                  // if(!snapshot.hasData){
-                  //   return categoriesWidget(context,null,value.addTaskController,value.addEmogieController,null,isNotFirst: false);
-                  // }
-                  
                   if(value.catergriesStatus == CatergriesStatus.loaded && snapshot.data !=null) {
                     List<TaskModel> task= snapshot.data?.docs
                       .map((doc) => TaskModel.fromJson(
@@ -103,14 +102,14 @@ class CategoriesScreen extends StatelessWidget {
                     ), 
                     itemBuilder:(context, index) {
                       if(isFirst&&index==0){
-                       return categoriesWidget(context,task[index],value.addTaskController,value.addEmogieController,index,isNotFirst: false);
+                       return categoriesWidget(context,task[index],null,value.addTaskController,value.addEmogieController,index,isNotFirst: false);
                       }
                       print(index);
                       
-                      return categoriesWidget(context,task[index-1],value.addTaskController,value.addEmogieController,index-1);}
+                      return categoriesWidget(context,task[index-1],value.getCompletedTaskLength(task[index -1]),value.addTaskController,value.addEmogieController,index-1);}
                   ):  Padding(
                     padding: const EdgeInsets.symmetric(vertical: 150),
-                    child: categoriesWidget(context,null,value.addTaskController,value.addEmogieController,null,isNotFirst: false),
+                    child: categoriesWidget(context,null,null,value.addTaskController,value.addEmogieController,null,isNotFirst: false),
                   ),
                 );
                   }else if(value.catergriesStatus == CatergriesStatus.loading){

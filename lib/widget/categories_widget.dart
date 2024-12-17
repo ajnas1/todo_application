@@ -7,6 +7,7 @@ import 'package:todo/widget/taskAlert_dialog_widget.dart';
 Widget categoriesWidget(
     BuildContext context,
     TaskModel? task,
+    int? completedTaskLength,
     TextEditingController titleController,
     TextEditingController emogieController,
     int? index,
@@ -42,6 +43,7 @@ Widget categoriesWidget(
                           fontWeight: FontWeight.w700),
                     ),
                     Text('${task.todo.length} tasks'),
+                    Text('completed task $completedTaskLength'),
                   ],
                 )
               : const Center(
